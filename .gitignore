@@ -1,0 +1,5 @@
+ipch/*
+*.VC.VC.opendb
+*.VC.db
+x64/*
+simdTest/x64/*
