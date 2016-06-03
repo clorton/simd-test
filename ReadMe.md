@@ -2,39 +2,18 @@
     CONSOLE APPLICATION : simdTest Project Overview
 ========================================================================
 
-AppWizard has created this simdTest application for you.
+Compare iteration over individual agent objects with SIMD operation on the relevant data.
 
-This file contains a summary of what you will find in each of the files that
-make up your simdTest application.
+Sample output from Intel Xeon E5-2630 @ 2.3GHz:
 
+Total infectivity: 182821.078125
+Attenuate (ms): 252.352506
+Sum (ms):       12.075272
+Total infectivity: 182837.437500
+Attenuate (ms): 3.145453
+Sum (ms):       0.220914
 
-simdTest.vcxproj
-    This is the main project file for VC++ projects generated using an Application Wizard.
-    It contains information about the version of Visual C++ that generated the file, and
-    information about the platforms, configurations, and project features selected with the
-    Application Wizard.
+The attenuate step (multiply by 0.9 ten times) is ~80x faster with SIMD.
+The sum step is 50x-60x faster with SIMD (more variability in timing with the shorter duration).
 
-simdTest.vcxproj.filters
-    This is the filters file for VC++ projects generated using an Application Wizard. 
-    It contains information about the association between the files in your project 
-    and the filters. This association is used in the IDE to show grouping of files with
-    similar extensions under a specific node (for e.g. ".cpp" files are associated with the
-    "Source Files" filter).
-
-simdTest.cpp
-    This is the main application source file.
-
-/////////////////////////////////////////////////////////////////////////////
-Other standard files:
-
-StdAfx.h, StdAfx.cpp
-    These files are used to build a precompiled header (PCH) file
-    named simdTest.pch and a precompiled types file named StdAfx.obj.
-
-/////////////////////////////////////////////////////////////////////////////
-Other notes:
-
-AppWizard uses "TODO:" comments to indicate parts of the source code you
-should add to or customize.
-
-/////////////////////////////////////////////////////////////////////////////
+The results differ because the SIMD operation uses 8 parallel accumulators which don't lose precision as quickly. The SIMD result is, technically, more correct.
