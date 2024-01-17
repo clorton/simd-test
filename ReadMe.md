@@ -1,21 +1,14 @@
-========================================================================
-    CONSOLE APPLICATION : simdTest Project Overview
-========================================================================
+# CONSOLE APPLICATION : simdTest Project Overview
 
 Compare iteration over individual agent objects with SIMD operation on the relevant data.
 
-| Sample output from Intel Xeon E5-2630 @ 2.3GHz |
-| --- |
-| *"brute force"* |
-| Total infectivity: 182821.078125 |
-| Attenuate (ms): 252.352506 |
-| Sum (ms):       12.075272 |
-| *SIMD* |
-| Total infectivity: 182837.437500 |
-| Attenuate (ms): 3.145453 |
-| Sum (ms):       0.220914 |
+|Sample output from Intel Xeon E5-2630 @ 2.3GHz|*"brute force"*|*SIMD*|speedup|
+|---|:-:|:-:|:-:|
+|Total infectivity|182821.078125|182837.437500|n/a|
+| Attenuate (ms)|252.352506|3.145453|80x|
+| Sum (ms)|12.075272|0.220914|55x|
 
-This is working on 2^20 agents/values.
+This is working on 2<sup>20</sup> agents/values.
 
 The attenuate step (multiply by 0.9 ten times) is ~80x faster with SIMD.
 The sum step is 50x-60x faster with SIMD (more variability in timing with the shorter duration).
